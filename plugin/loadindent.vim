@@ -10,8 +10,13 @@ let g:loaded_loadindent = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
-let g:loadindent#indent_candidates = [2, 3, 4, 8]
-let g:loadindent#max_read_lines = 300
+if !exists('g:loadindent#indent_candidates')
+    let g:loadindent#indent_candidates = [2, 3, 4, 8]
+endif
+
+if !exists('g:loadindent#max_read_lines')
+    let g:loadindent#max_read_lines = 300
+endif
 
 augroup loadindent
     autocmd!
