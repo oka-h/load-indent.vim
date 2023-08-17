@@ -24,13 +24,19 @@ augroup loadindent
 augroup END
 
 function! s:load_indent_setting() abort
+    try
+        let l:file = readfile(expand('%'), '', g:loadindent#max_read_lines)
+    catch
+        return
+    endtry
+
     let l:indent_count = {}
     for l:width in g:loadindent#indent_candidates
         let l:indent_count[l:width] = 0
     endfor
 
     let l:pre_sp_width = 0
-    for l:line in readfile(expand('%'), '', g:loadindent#max_read_lines)
+    for l:line in l:file
         if l:line !~# '\S'
             continue
         endif
